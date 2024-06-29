@@ -2,7 +2,7 @@
 #define n 5
 int a[n] , top = -1;
 
-int insertEnd(int data)
+int insertend(int data)
 {
     if (top >= n-1)
     {
@@ -22,14 +22,24 @@ int display()
         printf("%d ",a[i]);
     }
 }
-
 int main()
 {
-    insertEnd(10);
-    insertEnd(20);
-    insertEnd(30);
-    insertEnd(40);
-    insertEnd(50);
-    // insertEnd(60);
+    insertend(10);
+    insertend(20);
+    insertend(30);
+    insertend(40);
+    insertend(50);
+   
     display();
 }
+
+
+
+
+
+
+
+
+
+
+

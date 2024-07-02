@@ -37,9 +37,6 @@ int main()
     int i,j,k,l;
    
     find_element();
- 
-
-       
 }
 
 

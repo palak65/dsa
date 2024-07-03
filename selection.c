@@ -17,6 +17,7 @@ int selection_short(int a[])
                 a[j] = t;
             }
         }
+        
     }
 }
 

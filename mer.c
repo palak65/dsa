@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
+#define z 15
 
 void Merge(int a[] , int l ,int mid ,int h)
 {
-    int b[50];
+    int b[z];
     int i = l , j = mid + 1 , k = l;
 
     while (i <= mid && j <= h)
@@ -44,7 +45,7 @@ int Mergesort(int a[] , int l , int h)
 }
 int main()
 {
-    int a[15] , n = 15 , i;
+    int a[z], i,n=z;
 
     for ( i = 0; i < n; i++)
     {
@@ -63,4 +64,4 @@ int main()
     {
         printf("%d ",a[i]);
     }
-}
+}    

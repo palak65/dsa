@@ -8,7 +8,7 @@ struct node
 
 int main()
 {
-    struct node a,b,c,d;
+    struct node a,b,c;
 
     a.data=100;
     a.ch='A';

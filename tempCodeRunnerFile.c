@@ -1,1 +1,2 @@
-  // insert_First(70);
+deleteEnd();
+    // deleteEnd();

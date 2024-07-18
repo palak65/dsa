@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct node
 {
     int data;
-    struct node *prev;  
     struct node *next;
+    struct node *prev;
 };
+
 struct node *head = NULL;
 
 void insertEnd(int val)
@@ -13,27 +15,48 @@ void insertEnd(int val)
     struct node *ptr = head;
     struct node *temp = malloc(sizeof(struct node));
     temp->data = val;
+    temp->next = NULL;
+    temp->prev = NULL;
 
     if (head == NULL)
     {
         head = temp;
-        temp->next = head;
-        temp->prev = temp;
         return;
     }
-    else
-    {
-         while (ptr->next != head)
+
+    while (ptr->next != NULL)
     {
         ptr = ptr->next;
     }
+
     ptr->next = temp;
     temp->prev = ptr;
-    temp->next = head;
-    head->prev = temp;
-    return;
-    }
 }
+
+void deleteEnd()
+{
+    struct node *ptr = head;
+    struct node *p;
+    if (head == NULL)
+    {
+        printf("List Is Already Empty.....\n");
+    }
+    else if (ptr->next == NULL)
+    {
+        head = NULL;
+        free(ptr);
+        return;
+    }
+    while (ptr->next != NULL)
+    {
+        p = ptr;
+        ptr = ptr->next;
+    }
+    p->next = NULL;
+    free(ptr);
+    return;
+}
+
 void insertFirst(int val)
 {
     struct node *ptr = head;
@@ -42,51 +65,24 @@ void insertFirst(int val)
 
     if (head == NULL)
     {
+        temp->next = NULL;
+        temp->prev = NULL;
         head = temp;
-        temp->next = head;
-        temp->prev = head;
         return;
-    }
-   
-    while (ptr->next != head)
-    {
-        ptr = ptr->next;
-    }
-    ptr->next = temp;
-    ptr->prev=ptr;
-    temp->next = head;
-    head->prev=temp;
-    head=temp;
-    return;
-    }
-  
-
-void deleteEnd()
-{
-    struct node *ptr = head;
-    struct node *prev;
-    if (head == NULL)
-    {
-        printf("List Is Allready Empty.....\n");
-    }
-    else if (ptr->next == head)
-    {
-        head = NULL;
-        free(ptr);
-      
     }
     else
     {
-    while (ptr->next != head)
-    {
-        prev = ptr;
-        ptr = ptr->next;
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        temp->prev = NULL;
+        temp->next = head;
+        head->prev = temp;
+        head = temp;
     }
-    prev->next = head;
-    free(ptr);
 }
-    return;
-}
+
 void deleteFirst()
 {
     struct node *ptr = head;
@@ -95,18 +91,16 @@ void deleteFirst()
     {
         printf("List Is Already Empty....\n");
     }
-
-    while (ptr->next != head)
-   {
-        ptr = ptr->next;
-    
-   
-    head->next-> prev=ptr;
-    free(temp);
-    return;
+    else if (head->next == NULL)
+    {
+        head = NULL;
+        free(ptr);
+        return;
     }
+    head = ptr->next;
+    ptr->next->prev = NULL;
+    free(ptr);
 }
-
 
 void insertMid(int val, int pos)
 {
@@ -115,54 +109,53 @@ void insertMid(int val, int pos)
 
     temp->data = val;
     struct node *p;
-
     while (ptr->data != pos)
     {
         p = ptr;
         ptr = ptr->next;
     }
     p->next = temp;
-    temp->prev = p;
     temp->next = ptr;
     ptr->prev = temp;
     return;
 }
+
 void midDelete(int pos)
 {
     struct node *ptr = head;
     struct node *p;
-
     while (ptr->data != pos)
     {
         p = ptr;
         ptr = ptr->next;
     }
     p->next = ptr->next;
-    ptr->next->prev = p;
+    ptr->prev = p;
     free(ptr);
     return;
 }
-int display()
+
+void display()
 {
     struct node *ptr = head;
-    if (ptr == NULL)
+    if (head == NULL)
     {
-        printf("list is empty");
+        printf("List Is Empty....\n");
     }
-
-    while (ptr->next != head)
+    else
     {
-        printf("%d ", ptr->data);
-        ptr = ptr->next;
+        while (ptr != NULL)
+        {
+            printf("%d ", ptr->data);
+            ptr = ptr->next;
+        }
     }
-    printf("%d ", ptr->data);
     printf("\n");
 }
 
 int main()
 {
-
-    int ch, i, j, x, y;
+    int ch = 0, i, j, x, y;
 
     do
     {
@@ -172,7 +165,7 @@ int main()
         printf("Press 4 for Delete First.\n");
         printf("Press 5 for Mid Insert.\n");
         printf("Press 6 for Mid Delete.\n");
-        printf("Press 7 For Display.\n");
+        printf("Press 9 For Display.\n");
         printf("Press 0 Exit.\n");
 
         printf("Enter Your Choice :");
@@ -214,7 +207,7 @@ int main()
             midDelete(x);
             break;
 
-        case 7:
+        case 9:
             display();
             break;
 
